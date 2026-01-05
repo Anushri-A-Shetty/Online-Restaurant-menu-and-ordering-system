@@ -90,12 +90,11 @@
   </section>
 
   <script type="module">
-    // Load cart items from localStorage
+    
     function getCart() {
       return JSON.parse(localStorage.getItem("cart")) || [];
     }
 
-    // Render cart items to page
     function renderCart() {
       const cart = getCart();
       const cartItemsDiv = document.getElementById("cart-items");
@@ -125,7 +124,7 @@
       totalPriceSpan.textContent = total.toFixed(2);
     }
 
-    // submission
+  
     document.getElementById("checkout-form").addEventListener("submit", (e) => {
       e.preventDefault();
 
@@ -139,10 +138,10 @@
       }
 
 
-      // Clear cart
+    
       localStorage.removeItem("cart");
 
-      // Show confirmation message
+    
       const messageDiv = document.getElementById("order-message");
       messageDiv.textContent = `Your order has been placed.`;
 

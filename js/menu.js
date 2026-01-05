@@ -35,11 +35,11 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Initial load
+
   displayDishes(dishes);
   renderCart();
 
-  // Search functionality
+  
     function applyFilters() {
     const query = searchInput.value.toLowerCase();
     const selectedCategory = categoryFilter.value;
