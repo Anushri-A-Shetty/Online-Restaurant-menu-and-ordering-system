@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Menu</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Menu</h1>
+    <nav>
+      <a href="index.html">Home</a> |
+      <a href="menu.html">Menu</a> |
+      <a href="checkout.html">Checkout</a>
+    </nav>
+  </header>
+  <main class="main-layout">
+    <section class="menu-section">
+      <select id="category-filter">
+  <option value="All">All</option>
+  <option value="Beverages">Beverages</option>
+  <option value="Breakfast">Breakfast</option>
+  <option value="Gravy">Gravy</option>
+  <option value="Rice">Rice</option>
+  <option value="Roti">Roti</option>
+</select>
+
+      <input type="text" id="search-input" placeholder="Search dishes..." />
+      <style>
+        #search-input{
+          display: none;
+        }
+      </style>
+      <div id="menu" class="menu-grid"></div>
+    </section>
+
+    <aside class="cart-panel">
+      <h2>Your Cart</h2>
+      <div id="cart-list"></div>
+      <p>Total: <span id="cart-total">$0.00</span></p>
+      <a href="checkout.html" class="button">Proceed to Checkout</a>
+    </aside>
+  </main>
+
+  
+
+  <script type="module" src="js/menu.js"></script>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Checkout</title>
+  <link rel="stylesheet" href="/style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      background: #fafafa;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    .cart-item {
+      border-bottom: 1px solid #ddd;
+      padding: 0.5rem 0;
+      display: flex;
+      justify-content: space-between;
+    }
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+    .total {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      text-align: right;
+    }
+    form {
+      margin-top: 2rem;
+      max-width: 400px;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.3rem;
+      margin-top: 1rem;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .message {
+      margin-top: 1rem;
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Checkout</h1>
+
+  <section id="cart-summary">
+    <h2>Your Order</h2>
+    <div id="cart-items"></div>
+    <div class="total">Total: Rs.<span id="total-price">0.00</span></div>
+  </section>
+
+  <section id="customer-info">
+    <h2>Table Number</h2>
+    <form id="checkout-form">
+      <label for="Table No">Table Number</label>
+      <input type="text" id="name" required />
+
+
+      <label for="payment">Payment Type:</label>
+      <select id="payment" required>
+        <option value="">Select Payment</option>
+        <option value="pickup">Pay on Pickup</option>
+        <option value="card">Credit/Debit Card</option>
+        <option value="online">Online Payment</option>
+      </select>
+
+      <button type="submit">Place Order</button>
+    </form>
+    <div class="message" id="order-message"></div>
+  </section>
+
+  <script type="module">
+    // Load cart items from localStorage
+    function getCart() {
+      return JSON.parse(localStorage.getItem("cart")) || [];
+    }
+
+    // Render cart items to page
+    function renderCart() {
+      const cart = getCart();
+      const cartItemsDiv = document.getElementById("cart-items");
+      const totalPriceSpan = document.getElementById("total-price");
+
+      cartItemsDiv.innerHTML = "";
+      let total = 0;
+
+      if (cart.length === 0) {
+        cartItemsDiv.textContent = "Your cart is empty.";
+        totalPriceSpan.textContent = "0.00";
+        return;
+      }
+
+      cart.forEach(item => {
+        const itemDiv = document.createElement("div");
+        itemDiv.className = "cart-item";
+        const subtotal = item.price * item.quantity;
+        itemDiv.innerHTML = `
+          <div>${item.name} × ${item.quantity}</div>
+          <div>Rs.${subtotal.toFixed(2)}</div>
+        `;
+        cartItemsDiv.appendChild(itemDiv);
+        total += subtotal;
+      });
+
+      totalPriceSpan.textContent = total.toFixed(2);
+    }
+
+    // submission
+    document.getElementById("checkout-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+     
+      const payment = document.getElementById("payment").value;
+
+      if (!name  || !payment) {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+
+      // Clear cart
+      localStorage.removeItem("cart");
+
+      // Show confirmation message
+      const messageDiv = document.getElementById("order-message");
+      messageDiv.textContent = `Your order has been placed.`;
+
+      e.target.reset();
+
+      
+      document.getElementById("cart-items").innerHTML = "";
+      document.getElementById("total-price").textContent = "0.00";
+    });
+
+  
+    renderCart();
+  </script>
+</body>
+</html>
+
