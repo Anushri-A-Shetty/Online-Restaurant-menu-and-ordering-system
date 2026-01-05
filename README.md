@@ -7,7 +7,7 @@ CSS
 JavaScript
 
 Features:
-Display the restaurant menu items
-Add or remove items to the cart
-Automatic total price calculation
+Display the restaurant menu items.
+Add or remove items to the cart.
+Automatic total price calculation.
 
