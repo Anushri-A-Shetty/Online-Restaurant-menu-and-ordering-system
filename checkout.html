@@ -95,6 +95,7 @@
       return JSON.parse(localStorage.getItem("cart")) || [];
     }
 
+    
     function renderCart() {
       const cart = getCart();
       const cartItemsDiv = document.getElementById("cart-items");
